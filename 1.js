@@ -1,24 +1,16 @@
-class Information {
-    constructor(id, name, phone, address) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-    }
-}
-function getUserInput() {
-    let id = prompt("Nhập ID:");
-    let name = prompt("Nhập tên:");
-    let phone = prompt("Nhập số điện thoại:");
-    let address = prompt("Nhập địa chỉ:");
+let person = {
+    name: "hung anh",
+    age: 19,
+    address: "nghe an",
+};
+console.log("Thông tin ban đầu của đối tượng:");
+console.log("Tên:", person.name);
+console.log("Tuổi:", person.age);
+console.log("Địa chỉ:", person.address);
 
-    let userInformation = new Information(id, name, phone, address);
-
-    console.log("Thông tin cá nhân:");
-    console.log("ID: " + userInformation.id);
-    console.log("Tên: " + userInformation.name);
-    console.log("Số điện thoại: " + userInformation.phone);
-    console.log("Địa chỉ: " + userInformation.address);
-}
-getUserInput();
-
+person.dateOfBirth = "04-06-2005";
+delete person.age;
+console.log("\nThông tin sau khi thêm ngày sinh và xóa tuổi:");
+console.log("Tên:", person.name);
+console.log("Ngày sinh:", person.dateOfBirth);
+console.log("Địa chỉ:", person.address);

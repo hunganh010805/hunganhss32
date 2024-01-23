@@ -1,12 +1,29 @@
-function Product(id, name, price, quantity) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.quantity = quantity;
+function Book(title, author, publishedYear) {
+    this.title = title;
+    this.author = author;
+    this.publishedYear = publishedYear;
 }
-let product1 = new Product(1, "iphone", 6545, 8);
-console.log("Thông tin của sản phẩm:");
-console.log("ID:", product1.id);
-console.log("Tên:", product1.name);
-console.log("Giá:", product1.price);
-console.log("Số lượng:", product1.quantity);
+Book.prototype.displayInfo = function() {
+    console.log("Tiêu đề:", this.title);
+    console.log("Tác giả:", this.author);
+    console.log("Năm xuất bản:", this.publishedYear);
+    console.log("\n");
+};
+let library = {
+    books: [],
+    addBook: function(book) {
+        this.books.push(book);
+    },
+    displayLibrary: function() {
+        console.log("Danh sách sách trong thư viện:");
+        this.books.forEach(function(book, index) {
+            console.log("Sách thứ " + (index + 1) + ":");
+            book.displayInfo();
+        });
+    },
+};
+let book1 = new Book("bachtuyetva7chulun", "hunganh", 2005);
+let book2 = new Book("conan", "trungnguyen", 2001);
+library.addBook(book1);
+library.addBook(book2);
+library.displayLibrary();

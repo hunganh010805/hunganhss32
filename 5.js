@@ -1,23 +1,45 @@
-function Book(author, name) {
+function Book(title, author, publishedYear) {
+    this.title = title;
     this.author = author;
-    this.name = name;
+    this.publishedYear = publishedYear;
+    this.isAvailable = true;
 }
-let books = [
-    new Book("Author1", "Book1"),
-    new Book("Author2", "Book2"),
-    new Book("Author3", "Book3"),
-];
-let authorToSearch = prompt("Nhập tên tác giả:");
-let foundBook = false;
-
-for (let i = 0; i < books.length; i++) {
-    if (books[i].author.toLowerCase() === authorToSearch.toLowerCase()) {
-        console.log("Đối tượng Book tìm được:");
-        console.log("Tác giả:", books[i].author);
-        console.log("Tên sách:", books[i].name);
-        foundBook = true;
+Book.prototype.borrow = function() {
+    if (this.isAvailable) {
+        console.log("Đã mượn sách:", this.title);
+        this.isAvailable = false;
+    } else {
+        console.log("Sách không có sẵn để mượn.");
     }
-}
-if (!foundBook) {
-    console.log("Không tìm thấy sách.");
-}
+};
+Book.prototype.returnBook = function() {
+    if (!this.isAvailable) {
+        console.log("Đã trả sách:", this.title);
+        this.isAvailable = true;
+    } else {
+        console.log("Sách đã có sẵn.");
+    }
+};
+let library = {
+    books: [],
+    addBook: function(book) {
+        this.books.push(book);
+    },
+    isBookAvailable: function(bookTitle) {
+        let foundBook = this.books.find(book => book.title === bookTitle);
+        if (foundBook) {
+            return foundBook.isAvailable;
+        } else {
+            console.log("Không tìm thấy sách trong thư viện.");
+            return false;
+        }
+    },
+};
+let Doraemon = new Book("achtuyetva7chulun", "hunganh", 2013);
+let Naruto = new Book("conan", "rungnguyen", 2024);
+library.addBook(Doraemon);
+library.addBook(Naruto);
+Doraemon.borrow();
+Doraemon.returnBook();
+let isBookAvailable = library.isBookAvailable("Doraemon");
+console.log("Cuốn sách có sẵn để mượn:", isBookAvailable);
